@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dynamicdatasource.dao.InstanceInfoMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.dynamicdatasource.model.InstanceInfo">
+        <result column="id" property="id"/>
+        <result column="instance_name" property="instanceName"/>
+        <result column="instance_ip" property="instanceIp"/>
+        <result column="db_name" property="dbName"/>
+        <result column="instance_port" property="instancePort"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        instance_name,
+        instance_ip,
+        db_name,
+        instance_port,
+        user_name,
+        password
+    </sql>
+
+    <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM mdm_instance_info
+        where instance_name = #{instanceName,jdbcType=VARCHAR}
+    </select>
+</mapper>
